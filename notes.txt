@@ -1,0 +1,79 @@
+
+  // check if we have 2 times same filter
+  useEffect(() => {
+    let newFilter = filters.filter(
+      (filter, index) => filters.indexOf(filter) === index,
+    )
+    setFilteredData(newFilter)
+  }, [filters])
+
+  // filterDataByLanguage
+  function filterByLanguage(inf) {
+    let arrOfJobs = []
+    console.log(inf)
+    data.filter((job) => {
+      job.languages.filter((language) => {
+        if (language === inf) {
+          // console.log(job)
+          arrOfJobs.push(job)
+        }
+      })
+    })
+    setFilteredJobs(arrOfJobs)
+  }
+
+
+   // check if we have 2 times same filter
+  useEffect(() => {
+    let newFilter = filters.filter(
+      (filter, index) => filters.indexOf(filter) === index,
+    )
+    setFilteredData(newFilter)
+  }, [filters])
+
+  // filterDataByLanguage
+  function filterByLanguage(pressedLanguage) {
+    let arrOfJobs = []
+    filteredJobs.filter((job) => {
+      job.languages.filter((language) => {
+        if (language === pressedLanguage) {
+          arrOfJobs.push(job)
+        }
+      })
+    })
+    setFilteredJobs(arrOfJobs)
+  }
+
+  // filterDataByTool
+  function filterDataByTools(pressedTool) {
+    let arrOfTools = []
+    filteredJobs.filter((job) => {
+      job.tools.filter((tool) => {
+        if (tool === pressedTool) {
+          arrOfTools.push(job)
+        }
+      })
+    })
+    setFilteredJobs(arrOfTools)
+  }
+
+  // filterDataByRole
+  function filterDataByRole(role) {
+    let arrOfRoles = []
+    filteredJobs.filter((job) => {
+      if (job.role === role) {
+        arrOfRoles.push(job)
+      }
+    })
+    setFilteredJobs(arrOfRoles)
+  }
+
+  function filterDataByLevel(level) {
+    let arrOfLevels = []
+    filteredJobs.filter((job) => {
+      if (job.level === level) {
+        arrOfLevels.push(job)
+      }
+    })
+    setFilteredJobs(arrOfLevels)
+  }

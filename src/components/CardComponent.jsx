@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 function CardComponent(props) {
-  const { jobs, filters, setFilters } = props
+  const { jobs } = props
 
   return (
     <div className="py-6 px-20">
@@ -35,45 +35,9 @@ function CardComponent(props) {
           </div>
         </div>
         <div className="flex gap-5 text-cyan-600 font-bold text-sm">
-          <button
-            onClick={(event) => {
-              setFilters([...filters, jobs.role])
-              console.log(event)
-            }}
-            className="bg-cyan-100 px-2 py-1 rounded-md"
-          >
+          <button className="bg-cyan-100 px-2 py-1 rounded-md">
             {jobs.role}
           </button>
-          <button
-            onClick={(event) => {
-              setFilters([...filters, jobs.level])
-            }}
-            className="bg-cyan-100 px-2 py-1 rounded-md"
-          >
-            {jobs.level}
-          </button>
-          {jobs.languages.map((language, index) => (
-            <button
-              key={index}
-              onClick={(event) => {
-                setFilters([...filters, language])
-              }}
-              className="bg-cyan-100 px-2 py-1 rounded-md"
-            >
-              {language}
-            </button>
-          ))}
-          {jobs.tools.map((tool, index) => (
-            <button
-              key={index}
-              onClick={(event) => {
-                setFilters([...filters, tool])
-              }}
-              className="bg-cyan-100 px-2 py-1 rounded-md"
-            >
-              {tool}
-            </button>
-          ))}
         </div>
       </div>
     </div>
