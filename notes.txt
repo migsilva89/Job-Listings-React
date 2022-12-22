@@ -77,3 +77,38 @@
     })
     setFilteredJobs(arrOfLevels)
   }
+
+  //////////////////////////////////////
+
+  function App() {
+  const [selectedFilters, setSelectedFilters] = useState([])
+  const [cleanSelectedFilters, setCleanSelectedFilters] = useState([])
+  const [finalJobs, setFinalJobs] = useState(data)
+
+  useEffect(() => {
+    validateFilter()
+  }, [selectedFilters])
+
+  const handleFilter = (event) => {
+    setSelectedFilters([...selectedFilters, event.target.value])
+  }
+
+  function validateFilter() {
+    let newFilter = selectedFilters.filter(
+      (filter, index) => selectedFilters.indexOf(filter) === index,
+    )
+    setCleanSelectedFilters(newFilter)
+    console.log(cleanSelectedFilters)
+  }
+
+  const handleRemoveFilter = (event) => {
+    const cleanFilters = []
+    cleanSelectedFilters.filter((filter) => {
+      if (filter !== event.target.value) {
+        cleanFilters.push(filter)
+      }
+    })
+    setCleanSelectedFilters(cleanFilters)
+    setSelectedFilters(cleanFilters)
+    console.log(cleanSelectedFilters)
+  }

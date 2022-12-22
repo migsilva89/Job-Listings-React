@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 function CardComponent(props) {
-  const { jobs } = props
+  const { jobs, handleFilter } = props
 
   return (
     <div className="py-6 px-20">
@@ -35,9 +35,16 @@ function CardComponent(props) {
           </div>
         </div>
         <div className="flex gap-5 text-cyan-600 font-bold text-sm">
-          <button className="bg-cyan-100 px-2 py-1 rounded-md">
-            {jobs.role}
-          </button>
+          {jobs.filters.map((filter, index) => (
+            <button 
+            onClick={handleFilter}
+            className="bg-cyan-100 px-2 py-1 rounded-md"
+            key={index}
+            value={filter}
+            >
+              {filter}
+            </button>
+          ))}
         </div>
       </div>
     </div>
