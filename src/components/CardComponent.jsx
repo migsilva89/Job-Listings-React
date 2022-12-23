@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function CardComponent(props) {
   const { jobs, handleFilter } = props
@@ -36,11 +36,11 @@ function CardComponent(props) {
         </div>
         <div className="flex gap-5 text-cyan-600 font-bold text-sm">
           {jobs.filters.map((filter, index) => (
-            <button 
-            onClick={handleFilter}
-            className="bg-cyan-100 px-2 py-1 rounded-md"
-            key={index}
-            value={filter}
+            <button
+              onClick={handleFilter}
+              className="bg-cyan-100 px-2 py-1 rounded-md"
+              key={index}
+              value={filter}
             >
               {filter}
             </button>

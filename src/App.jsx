@@ -20,25 +20,33 @@ function App() {
   const [finalJobs, setFinalJobs] = useState(data)
 
   useEffect(() => {
-    handleData()
+    if (selectedFilters.length > 0) {
+      handleData()
+    } else if (selectedFilters.length === 0) {
+      setFinalJobs(data)
+    }
   }, [selectedFilters])
 
   const handleFilter = (event) => {
     if (selectedFilters.includes(event.target.value)) {
-      setSelectedFilters([...selectedFilters])
+      return
     } else {
       setSelectedFilters([...selectedFilters, event.target.value])
     }
   }
 
-  const handleData = (event) => {
+  const handleData = () => {
+    const filteredArrayOfObjects = data.filter((job) =>
+      selectedFilters.every((filter) => job.filters.includes(filter)),
+    )
+    setFinalJobs(filteredArrayOfObjects)
+  }
 
-    finalJobs.filter((job) => {
-     console.log(job.filters)
-     console.log(selectedFilters)
-    })
-  
- }
+  const handleRemove = (event) => {
+    setSelectedFilters(
+      selectedFilters.filter((item) => item !== event.target.value),
+    )
+  }
 
   return (
     <main>
@@ -55,6 +63,7 @@ function App() {
               {filter}
             </div>
             <button
+              onClick={handleRemove}
               value={filter}
               className="col-span-1  bg-gray-700 text-white rounded-r-sm"
             >
@@ -65,7 +74,7 @@ function App() {
       </section>
       <section className="bg-cyan-50 h-screen">
         {finalJobs.map((jobs, index) => (
-          <CardComponent key={index} jobs={jobs} handleFilter={handleFilter}/>
+          <CardComponent key={index} jobs={jobs} handleFilter={handleFilter} />
         ))}
       </section>
     </main>
