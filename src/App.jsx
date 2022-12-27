@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     if (selectedFilters.length > 0) {
       handleData()
-    } else if (selectedFilters.length === 0) {
+    } else {
       setFinalJobs(data)
     }
   }, [selectedFilters])
@@ -48,31 +48,62 @@ function App() {
     )
   }
 
+  const clearFilters = (event) => {
+    setSelectedFilters([])
+  }
   return (
-    <main>
-      <header className="bg-cyan-400">
-        <img src="./images/bg-header-desktop.svg" alt="" />
+    <main className="relative">
+      <header className="bg-cyan-400 sm:min-h-32 md:min-h-48 lg:min-h-64 xl:min-h-80">
+        <img
+          src="./images/bg-header-desktop.svg"
+          alt=""
+          className="min-w-max"
+        />
       </header>
-      <section className="flex">
-        {selectedFilters.map((filter, index) => (
-          <div
-            key={index}
-            className="grid grid-cols-4 font-bold m-3 text-center"
-          >
-            <div className="bg-gray-300 col-span-3 rounded-l-sm px-2">
-              {filter}
+      {selectedFilters.length > 0 && (
+        <section className="absolute inset-0 h-16 pt-1 bg-white top-28 mt-3 mx-20 rounded-md ">
+          <div className="flex justify-between px-6">
+            <div className="flex">
+              {selectedFilters.map((filter, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-4 font-bold m-3 text-center"
+                >
+                  <div className="bg-gray-300 text-xs col-span-3 pt-2 rounded-l-sm px-2">
+                    {filter}
+                  </div>
+                  <button
+                    onClick={handleRemove}
+                    value={filter}
+                    className="col-span-1 bg-gray-700 text-white rounded-r-sm px-2 py-1"
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
             </div>
-            <button
-              onClick={handleRemove}
-              value={filter}
-              className="col-span-1  bg-gray-700 text-white rounded-r-sm"
+            <div
+              onClick={clearFilters}
+              className="grid grid-cols-4 font-bold m-3 text-center cursor-pointer"
             >
-              X
-            </button>
+              <div className="bg-gray-300 text-xs col-span-3 pt-2 rounded-l-sm px-2">
+                Clear
+              </div>
+              <div className="col-span-1 bg-gray-700 text-white rounded-r-sm text-sx font-bold px-2 py-1">
+                X
+              </div>
+            </div>
           </div>
-        ))}
-      </section>
-      <section className="bg-cyan-50 h-screen">
+        </section>
+      )}
+
+      <section
+        className={
+          selectedFilters.length == 0
+            ? 'bg-cyan-50 h-screen'
+            : 'bg-cyan-50 h-screen pt-6'
+        }
+      >
         {finalJobs.map((jobs, index) => (
           <CardComponent key={index} jobs={jobs} handleFilter={handleFilter} />
         ))}
