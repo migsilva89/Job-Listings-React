@@ -1,44 +1,55 @@
 import React from 'react'
 
 function CardComponent(props) {
-  const { jobs, handleFilter } = props
+  const { jobs, handleFilter, jobClicked, setJobClicked } = props
 
   return (
-    <div className="py-6 px-20">
+    <div className="py-6 px-20 max-w-7xl mx-auto">
       <div className="bg-white py-5 px-10 flex justify-between items-center drop-shadow-2xl rounded-lg">
-        <div className="flex gap-5">
+        <div className="flex gap-5 items-center">
           <div>
             <img src={jobs.logo} alt="" />
           </div>
-          <div className="flex items-center">
+          <div className="flex pb-1 pt-1">
             <div>
-              <div className="flex gap-3 text-xs">
-                <div className="text-cyan-500 font-bold pt-1">
+              <div className="flex gap-3 pb-1">
+                <div className="text-darkCyan font-bold pt-1 text-md">
                   {jobs.company}
                 </div>
-                <div className="text-white bg-cyan-500 rounded-full font-bold py-1 px-3">
-                  NEW
-                </div>
-                <div className="text-white bg-black py-1 px-2 rounded-full font-bold">
-                  FEATURED
-                </div>
+                {jobs.new && (
+                  <div className="text-white text-sm bg-darkCyan rounded-full font-bold flex items-center px-2.5 my-0.5">
+                    NEW!
+                  </div>
+                )}
+                {jobs.featured && (
+                  <div className="text-white bg-veryDarkCyan flex items-center px-2.5 rounded-full font-bold text-sm my-0.5">
+                    FEATURED
+                  </div>
+                )}
               </div>
               <div>
-                <h2 className="font-bold py-1 tracking-wider text-md">
+                <button
+                  value={jobs.position}
+                  onClick={(event) => {
+                    setJobClicked(event.target.value)
+                  }}
+                  className="font-bold py-1 tracking-wider text-lg text-darkCyan"
+                >
                   {jobs.position}
-                </h2>
+                </button>
               </div>
-              <div className="flex gap-5 text-xs text-gray-400 font-bold">
-                <div>1d ago</div>·<div>Full time</div>·<div>Usa only</div>
+              <div className="flex gap-5 text-md text-darkCyan pt-1">
+                <div>{jobs.postedAt}</div>·<div>{jobs.contract}</div>·
+                <div>{jobs.location}</div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex gap-5 text-cyan-600 font-bold text-sm">
+        <div className="flex gap-5 text-darkCyan font-bold text-md">
           {jobs.filters.map((filter, index) => (
             <button
               onClick={handleFilter}
-              className="bg-cyan-100 px-2 py-1 rounded-md"
+              className="bg-lightCyan hover:bg-darkCyan hover:text-white px-3 py-1 flex items-center rounded-md shadow-md"
               key={index}
               value={filter}
             >

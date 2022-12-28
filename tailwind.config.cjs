@@ -4,7 +4,16 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        lightCyan: "#EFFAFA",
+        darkCyan:"#7B8E8E",
+        veryDarkCyan:"#2C3A3A"
+      }, 
+      fontFamily: {
+        'spartan': ['League Spartan', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }

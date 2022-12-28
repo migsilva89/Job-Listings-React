@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import data from '../data.json'
 import CardComponent from './components/CardComponent'
+import FilterComponent from './components/FilterComponent'
+import ClearComponent from './components/ClearComponent'
+import Header from './components/Header'
+import Modal from './components/Modal'
 
 data.forEach((job) => {
   job.filters = [job.role, job.level]
@@ -18,6 +22,7 @@ data.forEach((job) => {
 function App() {
   const [selectedFilters, setSelectedFilters] = useState([])
   const [finalJobs, setFinalJobs] = useState(data)
+  const [jobClicked, setJobClicked] = useState('')
 
   useEffect(() => {
     if (selectedFilters.length > 0) {
@@ -51,47 +56,45 @@ function App() {
   const clearFilters = (event) => {
     setSelectedFilters([])
   }
+
   return (
-    <main className="relative">
-      <header className="bg-cyan-400 sm:min-h-32 md:min-h-48 lg:min-h-64 xl:min-h-80">
-        <img
-          src="./images/bg-header-desktop.svg"
-          alt=""
-          className="min-w-max"
-        />
-      </header>
-      {selectedFilters.length > 0 && (
-        <section className="absolute inset-0 h-16 pt-1 bg-white top-28 mt-3 mx-20 rounded-md ">
-          <div className="flex justify-between px-6">
-            <div className="flex">
-              {selectedFilters.map((filter, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-4 font-bold m-3 text-center"
-                >
-                  <div className="bg-gray-300 text-xs col-span-3 pt-2 rounded-l-sm px-2">
-                    {filter}
-                  </div>
-                  <button
-                    onClick={handleRemove}
-                    value={filter}
-                    className="col-span-1 bg-gray-700 text-white rounded-r-sm px-2 py-1"
-                  >
-                    X
-                  </button>
-                </div>
-              ))}
+    <main className="font-spartan">
+      {jobClicked.length > 0 && (
+        <div
+          onClick={() => {
+            setJobClicked('')
+          }}
+          className="overflow-auto scrollbar-hide z-10 fixed w-screen h-screen lg:px-40 px-10 py-20 drop-shadow-2xl bg-black bg-opacity-75"
+        >
+          <div
+            onClick={(event) => {
+              event.stopPropagation()
+            }}
+            className="mx-auto max-w-7xl"
+          >
+            <div className="">
+              <Modal jobClicked={jobClicked} setJobClicked={setJobClicked} />
             </div>
-            <div
-              onClick={clearFilters}
-              className="grid grid-cols-4 font-bold m-3 text-center cursor-pointer"
-            >
-              <div className="bg-gray-300 text-xs col-span-3 pt-2 rounded-l-sm px-2">
-                Clear
+          </div>
+        </div>
+      )}
+
+      <Header />
+
+      {selectedFilters.length > 0 && (
+        <section className="absolute inset-0 h-16 pt-1 top-28 mt-3 max-w-7xl mx-auto px-20">
+          <div className="bg-white rounded-md">
+            <div className="flex justify-between px-6 py-1">
+              <div className="flex">
+                {selectedFilters.map((filter, index) => (
+                  <FilterComponent
+                    key={index}
+                    filter={filter}
+                    handleRemove={handleRemove}
+                  />
+                ))}
               </div>
-              <div className="col-span-1 bg-gray-700 text-white rounded-r-sm text-sx font-bold px-2 py-1">
-                X
-              </div>
+              <ClearComponent clearFilters={clearFilters} />
             </div>
           </div>
         </section>
@@ -100,12 +103,17 @@ function App() {
       <section
         className={
           selectedFilters.length == 0
-            ? 'bg-cyan-50 h-screen'
-            : 'bg-cyan-50 h-screen pt-6'
+            ? 'bg-lightCyan h-screen'
+            : 'bg-lightCyan h-screen pt-6'
         }
       >
         {finalJobs.map((jobs, index) => (
-          <CardComponent key={index} jobs={jobs} handleFilter={handleFilter} />
+          <CardComponent
+            key={index}
+            jobs={jobs}
+            handleFilter={handleFilter}
+            setJobClicked={setJobClicked}
+          />
         ))}
       </section>
     </main>
