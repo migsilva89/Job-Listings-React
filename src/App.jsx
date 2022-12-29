@@ -6,17 +6,12 @@ import FilterComponent from './components/FilterComponent'
 import ClearComponent from './components/ClearComponent'
 import Header from './components/Header'
 import Modal from './components/Modal'
+import { reduce } from 'lodash'
 
-data.forEach((job) => {
+const updatedData = data.map((job) => {
   job.filters = [job.role, job.level]
-
-  job.languages.filter((language) => {
-    job.filters.push(language)
-  })
-
-  job.tools.filter((tool) => {
-    job.filters.push(tool)
-  })
+  job.filters = job.filters.concat(job.languages, job.tools)
+  return job
 })
 
 function App() {
@@ -41,8 +36,15 @@ function App() {
   }
 
   const handleData = () => {
-    const filteredArrayOfObjects = data.filter((job) =>
-      selectedFilters.every((filter) => job.filters.includes(filter)),
+    const filteredArrayOfObjects = reduce(
+      data,
+      (acc, job) => {
+        if (selectedFilters.every((filter) => job.filters.includes(filter))) {
+          acc.push(job)
+        }
+        return acc
+      },
+      [],
     )
     setFinalJobs(filteredArrayOfObjects)
   }
@@ -58,7 +60,7 @@ function App() {
   }
 
   return (
-    <main className="font-spartan">
+    <main className="font-spartan relative">
       {jobClicked.length > 0 && (
         <div
           onClick={() => {
@@ -78,35 +80,32 @@ function App() {
           </div>
         </div>
       )}
-
       <Header />
-
-      {selectedFilters.length > 0 && (
-        <section className="absolute inset-0 h-16 pt-1 top-28 mt-3 max-w-7xl mx-auto px-20">
-          <div className="bg-white rounded-md">
-            <div className="flex justify-between px-6 py-1">
-              <div className="flex">
-                {selectedFilters.map((filter, index) => (
-                  <FilterComponent
-                    key={index}
-                    filter={filter}
-                    handleRemove={handleRemove}
-                  />
-                ))}
-              </div>
-              <ClearComponent clearFilters={clearFilters} />
-            </div>
-          </div>
-        </section>
-      )}
-
       <section
         className={
           selectedFilters.length == 0
-            ? 'bg-lightCyan h-screen'
+            ? 'bg-lightCyan h-screen pt-6'
             : 'bg-lightCyan h-screen pt-6'
         }
       >
+        {selectedFilters.length > 0 && (
+          <div className=" max-w-7xl mx-auto sm:px-20 px-5 -mt-14 lg:mb-0 mb-5">
+            <div className="bg-white rounded-md">
+              <div className="flex sm:justify-between justify-around px-4 py-1 items-center">
+                <div className="flex flex-wrap">
+                  {selectedFilters.map((filter, index) => (
+                    <FilterComponent
+                      key={index}
+                      filter={filter}
+                      handleRemove={handleRemove}
+                    />
+                  ))}
+                </div>
+                <ClearComponent clearFilters={clearFilters} />
+              </div>
+            </div>
+          </div>
+        )}
         {finalJobs.map((jobs, index) => (
           <CardComponent
             key={index}

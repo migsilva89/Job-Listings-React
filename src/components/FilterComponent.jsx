@@ -3,7 +3,7 @@ import React from 'react'
 function FilterComponent(props) {
   const { filter, handleRemove } = props
   return (
-    <div className="grid grid-cols-4 font-bold m-3 text-center shadow-md">
+    <div className="grid grid-cols-4 font-bold m-3 text-center shadow-md ">
       <div className="bg-lightCyan text-darkCyan text-md col-span-3 pt-1 rounded-l-sm px-2 text-">
         {filter}
       </div>

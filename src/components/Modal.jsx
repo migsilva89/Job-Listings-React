@@ -13,7 +13,7 @@ function Modal(props) {
           Back to List
         </button>
       </div>
-      <h1 className="text-2xl text-darkCyan font-bold">{props.jobClicked}</h1>
+      <h1 className="text-2xl text-black font-bold">{props.jobClicked}</h1>
       <p className='pt-3 text-darkCyan'>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam autem
         repudiandae eveniet minus nobis mollitia facilis quas, earum, distinctio

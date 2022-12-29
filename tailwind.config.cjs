@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       colors: {
         lightCyan: "#EFFAFA",
-        darkCyan:"#7B8E8E",
+        darkCyan:"#66a3a3",
         veryDarkCyan:"#2C3A3A"
       }, 
       fontFamily: {
