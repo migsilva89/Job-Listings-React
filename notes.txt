@@ -1,4 +1,0 @@
-adicionar as cores correctas e as letras
-configurar
-
-amanha tratar do responsive, depois postar
