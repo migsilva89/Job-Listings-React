@@ -12,7 +12,7 @@ module.exports = {
         spartan: ['League Spartan', 'sans-serif'],
       },
       backgroundImage: {
-        bgHeader: "url('./images/bg-header-desktop.svg')",
+        bgHeader: "url('/images/bg-header-desktop.svg')",
       },
     },
   },
