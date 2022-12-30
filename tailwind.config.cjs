@@ -12,6 +12,9 @@ module.exports = {
       }, 
       fontFamily: {
         'spartan': ['League Spartan', 'sans-serif']
+      }, 
+      backgroundImage: {
+        'headerBg': "url('./images/bg-header-desktop.svg')",
       }
     },
   },
