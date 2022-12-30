@@ -4,7 +4,7 @@ function CardComponent(props) {
   const { jobs, handleFilter, jobClicked, setJobClicked } = props
 
   return (
-    <div className="py-6 sm:px-20 px-5 max-w-7xl mx-auto">
+    <div className="py-3 sm:px-20 px-5 max-w-7xl mx-auto">
       <div className="bg-white py-5 px-10 lg:flex lg:justify-between items-center drop-shadow-2xl rounded-lg">
         <div className="lg:flex gap-5 items-center">
           <div className="lg:mt-0 -mt-12">
@@ -13,9 +13,9 @@ function CardComponent(props) {
           <div className="flex pb-1 pt-1">
             <div>
               <div className="flex gap-3 pb-1">
-                <div className="text-darkCyan font-bold pt-1 text-md">
+                <h1 className="text-darkCyan font-bold pt-1 text-md">
                   {jobs.company}
-                </div>
+                </h1>
                 {jobs.new && (
                   <div className="text-white text-sm bg-darkCyan rounded-full font-bold flex items-center px-2.5 my-0.5">
                     NEW!
@@ -53,7 +53,7 @@ function CardComponent(props) {
         <div className="lg:hidden h-0.5 w-full bg-gray-200 mt-3"></div>
         <div className="">
           <div
-            className={`flex flex-wrap pt-5 lg:pt-0 gap-5 text-darkCyan font-bold text-md lg:ml-10`}
+            className="flex flex-wrap pt-5 lg:pt-0 gap-5 text-darkCyan font-bold text-md lg:ml-10"
           >
             {jobs.filters.map((filter, index) => (
               <button

@@ -81,13 +81,7 @@ function App() {
         </div>
       )}
       <Header />
-      <section
-        className={
-          selectedFilters.length == 0
-            ? 'bg-lightCyan h-screen pt-6'
-            : 'bg-lightCyan h-screen pt-6'
-        }
-      >
+      <section className="bg-lightCyan h-full pt-10">
         {selectedFilters.length > 0 && (
           <div className=" max-w-7xl mx-auto sm:px-20 px-5 -mt-14 lg:mb-0 mb-5">
             <div className="bg-white rounded-md">
