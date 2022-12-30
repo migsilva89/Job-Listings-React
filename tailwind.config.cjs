@@ -1,21 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        lightCyan: "#EFFAFA",
-        darkCyan:"#66a3a3",
-        veryDarkCyan:"#2C3A3A"
-      }, 
+        lightCyan: '#EFFAFA',
+        darkCyan: '#66a3a3',
+        veryDarkCyan: '#2C3A3A',
+      },
       fontFamily: {
-        'spartan': ['League Spartan', 'sans-serif']
-      }, 
+        spartan: ['League Spartan', 'sans-serif'],
+      },
       backgroundImage: {
-        'headerBg': "url('./images/bg-header-desktop.svg')",
-      }
+        bgHeader: "url('./images/bg-header-desktop.svg')",
+      },
     },
   },
   plugins: [],
