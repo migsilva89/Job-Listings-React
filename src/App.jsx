@@ -8,7 +8,7 @@ import Header from './components/Header'
 import Modal from './components/Modal'
 import { reduce } from 'lodash'
 
-const updatedData = data.map((job) => {
+data.map((job) => {
   job.filters = [job.role, job.level]
   job.filters = job.filters.concat(job.languages, job.tools)
   return job
@@ -29,7 +29,7 @@ function App() {
 
   const handleFilter = (event) => {
     if (selectedFilters.includes(event.target.value)) {
-      return
+      return null
     } else {
       setSelectedFilters([...selectedFilters, event.target.value])
     }
@@ -55,7 +55,7 @@ function App() {
     )
   }
 
-  const clearFilters = (event) => {
+  const clearFilters = () => {
     setSelectedFilters([])
   }
 
@@ -81,7 +81,7 @@ function App() {
         </div>
       )}
       <Header />
-      <section className="bg-lightCyan h-full pt-10">
+      <section className="bg-lightCyan h-full pt-12">
         {selectedFilters.length > 0 && (
           <div className=" max-w-7xl mx-auto sm:px-20 px-5 -mt-14 lg:mb-0 mb-5">
             <div className="bg-white rounded-md">
